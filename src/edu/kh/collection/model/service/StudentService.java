@@ -26,8 +26,8 @@ public class StudentService {
 	// ArrayList(용량) : 용량만큼의 리스트 생성
 	//					-> 너무 큰 값을 작성하면 메모리를 많이 소모함.
 	
-	//private List<Student> studentList = new ArrayList<Student>(); // 검색(조회)에 효율적
-	private List<Student> studentList = new LinkedList<Student>(); // 추가, 수정, 삭제에 효율적
+	private List<Student> studentList = new ArrayList<Student>(); // 검색(조회)에 효율적
+	//private List<Student> studentList = new LinkedList<Student>(); // 추가, 수정, 삭제에 효율적
 	
 	// Student로 저장되는 타입이 제한된 리스트 생성
 	// == Student만 저장 가능 == 모든게 Student
@@ -40,6 +40,9 @@ public class StudentService {
 		studentList.add( new Student("강아지", 30, "서울시 강남구", 'M', 80) );
 		studentList.add( new Student("오미나", 27, "충북 청주시", 'F', 90) );
 		studentList.add( new Student("박주희", 24, "서울시 서대문구", 'F', 70) );
+		studentList.add( new Student("육미나", 24, "서울시 서대문구", 'F', 70) );
+		
+		System.out.println(studentList);
 	}
 	
 	
@@ -182,6 +185,7 @@ public class StudentService {
 		
 		// studentList가 비어있는 경우 "학생 정보가 없습니다" 출력
 		//if(studentList.size() == 0)
+		//if(studentList.size() < 1)
 		if(studentList.isEmpty()) {
 			System.out.println("학생 정보가 없습니다.");
 			
@@ -190,11 +194,11 @@ public class StudentService {
 		}
 		
 		// 일반 for문
-		/*for(int i = 0; i < studentList.size(); i++) {
-			System.out.println( studentList.get(i) );
+		for(int i = 0; i < studentList.size(); i++) {
+			Student std = studentList.get(i);
+			System.out.println( std );
 		}
-		*/
-		
+				
 		// 향상된 for문 (for each문)
 		// - 컬렉션, 배열의 모든 요소를 순차적으로 반복접근 할 수 있는 for문
 		// (순차적 : 0번 인덱스부터 마지막 요소까지 인덱스를 1씩 증가)
@@ -346,6 +350,14 @@ public class StudentService {
 		
 		boolean flag = true;
 		
+//		for(int i = 0; i < studentList.size(); i++) {
+//			if( input.equals( studentList.get(i).getName() ) ) { // 이름이 일치하는 경우
+//				System.out.println(studentList.get(i));
+//				
+//				flag = false;
+//			}
+//		}
+		
 		// 향상된 for문
 		for(Student std : studentList) {
 			
@@ -356,7 +368,7 @@ public class StudentService {
 			}
 		}
 		
-		if(flag) {
+		if(flag == true) {
 			System.out.println("검색 결과가 없습니다.");
 		}
 		
@@ -385,7 +397,7 @@ public class StudentService {
 			}
 		}
 		
-		if(flag) {
+		if(flag == true) {
 			System.out.println("검색 결과가 없습니다.");
 		}
 	}
