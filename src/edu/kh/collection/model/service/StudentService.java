@@ -335,29 +335,6 @@ public class StudentService {
 	}
 	
 	
-	/*public String searchName() {
-	// 검색할 이름 입력 : 고영희
-	System.out.print("검색할 이름 입력 : ");
-	String name = sc.next();
-	// Student [name=고영희, age=23, region=경기도 안산시, gender=F, score=100]
-	
-	boolean flag = false;
-	
-	for(int i = 0; i < studentList.size(); i++) {
-		if(name.equals(studentList.get(i).getName())) {
-			return studentList.get(i).toString();
-			flag = true;
-		} else {
-			// 검색 결과가 없습니다.
-			return "검색 결과가 없습니다";
-		}
-	}
-	
-	if(flag == false) {
-		return studentList.toString();
-	}
-	}*/
-	
 	/**
 	 * 이름이 일치하는 학생을 찾아서 조회하는 메서드
 	 */
