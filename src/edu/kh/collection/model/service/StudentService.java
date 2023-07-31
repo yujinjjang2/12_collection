@@ -105,8 +105,8 @@ public class StudentService {
 				case 2 : selectAll(); break;
 				case 3 : System.out.println( updateStudent() ); break;
 				case 4 : System.out.println( removeStudent() ); break;
-				case 5 : System.out.println( searchName() ); break;
-				case 6 : System.out.println("학생검색-포함"); break;
+				case 5 : searchName1(); break;
+				case 6 : searchName2(); break;
 				case 0 : System.out.println("프로그램 종료..."); break;
 				default : System.out.println("메뉴에 작성된 번호만 입력해주세요.");
 				}
@@ -335,21 +335,82 @@ public class StudentService {
 	}
 	
 	
-	public String searchName() {
+	/*public String searchName() {
 	// 검색할 이름 입력 : 고영희
 	System.out.print("검색할 이름 입력 : ");
 	String name = sc.next();
 	// Student [name=고영희, age=23, region=경기도 안산시, gender=F, score=100]
+	
+	boolean flag = false;
+	
 	for(int i = 0; i < studentList.size(); i++) {
 		if(name.equals(studentList.get(i).getName())) {
-			return studentList.toString();
+			return studentList.get(i).toString();
+			flag = true;
 		} else {
 			// 검색 결과가 없습니다.
 			return "검색 결과가 없습니다";
 		}
 	}
-	return studentList.toString();
 	
+	if(flag == false) {
+		return studentList.toString();
+	}
+	}*/
+	
+	/**
+	 * 이름이 일치하는 학생을 찾아서 조회하는 메서드
+	 */
+	public void searchName1() {
+		System.out.println("=====학생 검색(이름 일치)=====");
+		
+		System.out.print("검색할 이름 입력 : ");
+		String input = sc.next();
+		
+		boolean flag = true;
+		
+		// 향상된 for문
+		for(Student std : studentList) {
+			
+			if( input.equals( std.getName() ) ) { // 이름이 일치하는 경우
+				System.out.println(std);
+				
+				flag = false;
+			}
+		}
+		
+		if(flag) {
+			System.out.println("검색 결과가 없습니다.");
+		}
+		
+	}
+	
+	
+	/**
+	 * 이름에 특정 문자열이 포함되는 학생을 찾아서 조회하는 메서드
+	 */
+	public void searchName2() {
+		System.out.println("=====학생 검색(문자열 포함)=====");
+		
+		System.out.print("이름에 포함되는 문자열 입력 : ");
+		String input = sc.next();
+		
+		boolean flag = true;
+		
+		// 향상된 for문
+		for(Student std : studentList) {
+			
+			// boolean String.contains(문자열) : String에 문자열이 포함되어 있으면 true
+			if( std.getName().contains(input) ) { 
+				System.out.println(std);
+				
+				flag = false;
+			}
+		}
+		
+		if(flag) {
+			System.out.println("검색 결과가 없습니다.");
+		}
 	}
 
 }
