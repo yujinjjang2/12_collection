@@ -103,9 +103,9 @@ public class StudentService {
 				switch(menuNum) {
 				case 1 : System.out.println( addStudent() ); break;
 				case 2 : selectAll(); break;
-				case 3 : System.out.println("학생수정"); break;
-				case 4 : System.out.println("학생제거"); break;
-				case 5 : System.out.println("학생검색-일치"); break;
+				case 3 : System.out.println( updateStudent() ); break;
+				case 4 : System.out.println( removeStudent() ); break;
+				case 5 : System.out.println( searchName() ); break;
 				case 6 : System.out.println("학생검색-포함"); break;
 				case 0 : System.out.println("프로그램 종료..."); break;
 				default : System.out.println("메뉴에 작성된 번호만 입력해주세요.");
@@ -218,5 +218,138 @@ public class StudentService {
 		
 	}
 	
+	
+	/**
+	 * 학생 정보 수정 메서드
+	 */
+	public String updateStudent() throws InputMismatchException{
+		
+		// Student List.set(int index, Student e)
+		// -> List의 i번째 요소를 전달받은 e로 변경
+		// -> 반환값 Student == 변경 전 Student 객체가 담겨있다.
+		
+		System.out.println("====== 학생 정보 수정 ======");
+		
+		System.out.print("인덱스 번호 입력 : ");
+		int index = sc.nextInt();
+		
+		// 1) 학생 정보가 studentList에 있는가?
+		if(studentList.isEmpty()) {
+			return "입력된 학생 정보가 없습니다";
+			
+		// 2) 입력된 숫자가 0보다 작은가? (음수 검사)	
+		} else if( index < 0 ) {
+			return "음수는 입력할 수 없습니다";
+			
+			// 3) 만약 문자열을 입력한 경우 -> 예외처리 throws
+			
+		// 4) 입력받은 숫자가 studentList 범위 내 인덱스 번호인가?	
+		} else if( index >= studentList.size() ) {
+			return "범위를 넘어선 값을 입력할 수 없습니다.";
+			
+		} else {
+			// 수정 코드 작성
+			System.out.println(index + "번째 인덱스에 저장된 학생 정보");
+			System.out.println(studentList.get(index));
+			
+			System.out.print("이름 : ");
+			String name = sc.next();
+			
+			System.out.print("나이 : ");
+			int age = sc.nextInt();
+			sc.nextLine();// 입력 버퍼 개행 문자 제거
+			
+			System.out.print("사는 곳 : ");
+			String region = sc.nextLine();
+			
+			System.out.print("성별(M/F) : ");
+			char gender = sc.next().charAt(0);
+			
+			System.out.print("점수 : ");
+			int score = sc.nextInt(); // InputMismatchException
+			
+			// 입력받은 index번째에 새로운 학생 정보를 세팅 == 수정
+			// 이때, index번째에 있던 기존 학생 정보가 반환된다.
+			Student temp = studentList.set(index, new Student(name, age, region, gender, score));
+			
+			return temp.getName() + "의 정보가 변경되었습니다.";
+		}
+		
+	}
+	
+	
+	/**
+	 * 학생 정보 제거 메서드
+	 */
+	public String removeStudent() throws InputMismatchException{
+		
+		// Student List.remove(int index)
+		// 리스트에서 index번째 요소를 제거
+		// 이 때, 제거된 요소가 반환된다.
+		// * List는 중간에 비어있는 인덱스가 없게 하기 위해서
+		// remove() 동작 시 뒤쪽 요소를 한 칸씩 당겨온다.
+		
+		System.out.println("====== 학생 정보 제거 ======");
+		
+		System.out.print("인덱스 번호 입력 : ");
+		int index = sc.nextInt();
+		
+		// 1) 학생 정보가 studentList에 있는가?
+		if(studentList.isEmpty()) {
+			return "입력된 학생 정보가 없습니다";
+			
+		// 2) 입력된 숫자가 0보다 작은가? (음수 검사)	
+		} else if( index < 0 ) {
+			return "음수는 입력할 수 없습니다";
+			
+			// 3) 만약 문자열을 입력한 경우 -> 예외처리 throws
+			
+		// 4) 입력받은 숫자가 studentList 범위 내 인덱스 번호인가?	
+		} else if( index >= studentList.size() ) {
+			return "범위를 넘어선 값을 입력할 수 없습니다.";
+			
+		} else {
+			
+			// 학생 정보 제거
+			
+			System.out.print("정말 삭제 하시겠습니까? (Y/N) : ");
+			char ch = sc.next().toUpperCase().charAt(0);
+			// 		String 대문자 -> 대문자 0번 인덱스 문자
+			
+			// String.toUpperCase() : 문자열을 대문자로 변경
+			// String.toLowerCase() : 문자열을 소문자로 변경
+			
+			if(ch == 'Y') {
+				Student temp = studentList.remove(index);
+				return temp.getName() + "의 정보가 제거되었습니다.";
+				
+			} else {
+				return "취소";
+			}
+		
+			
+			
+			
+		}
+		
+	}
+	
+	
+	public String searchName() {
+	// 검색할 이름 입력 : 고영희
+	System.out.print("검색할 이름 입력 : ");
+	String name = sc.next();
+	// Student [name=고영희, age=23, region=경기도 안산시, gender=F, score=100]
+	for(int i = 0; i < studentList.size(); i++) {
+		if(name.equals(studentList.get(i).getName())) {
+			return studentList.toString();
+		} else {
+			// 검색 결과가 없습니다.
+			return "검색 결과가 없습니다";
+		}
+	}
+	return studentList.toString();
+	
+	}
 
 }
