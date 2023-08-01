@@ -159,6 +159,7 @@ public class SetService {
 		// parsing : 데이터 형식을 변환
 		
 		int num1 = Integer.parseInt("100"); // 문자열 "100"을 int 형식으로 변환
+//		int num3 = Integer.valueOf("100"); // 문자열 "100"을 int 형식으로 변환
 		double num2 = Double.parseDouble("1.23456"); // 문자열 "1.23456" 을 double 형식으로 변환
 		
 		System.out.println( num1 + num2 ); // 101.23456
@@ -204,7 +205,7 @@ public class SetService {
 		// 중복 X
 		
 		// 하단 내 풀이
-//		Set<Integer> set = new HashSet<Integer>();
+//		Set<Integer> set = new TreeSet<Integer>();
 //		
 //		for(int i = 0; i < 6; i++) {
 //			

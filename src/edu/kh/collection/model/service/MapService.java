@@ -78,7 +78,8 @@ public class MapService {
 		System.out.println( map.get("id") ); // user02
 		System.out.println( map.get("pw") ); // pass02
 		System.out.println( map.get("age") ); // 25
-		
+
+		System.out.println(map);
 		System.out.println("---------------------------------------");
 		
 		// **** Map에 저장된 데이터 순차적으로 접근하기 ****
@@ -94,6 +95,7 @@ public class MapService {
 		
 		// 향상된 for문
 		for( String key : set ) {
+			
 			System.out.println( map.get(key) );
 		}
 		
@@ -120,6 +122,8 @@ public class MapService {
 			// Map을 List 추가
 			list.add(map);
 		}
+		
+		System.out.println(list.toString());
 		
 		// for 문 종료 시 list에 10개의 객체가 추가되어있다.
 		
